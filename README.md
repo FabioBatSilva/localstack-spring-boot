@@ -42,6 +42,8 @@ You need to make sure that the profile you want to use LocalStack in includes th
         enabled: true
       sqs:
         enabled: true
+      ssm:
+        enabled: true
       redshift:
         enabled: true
 ```

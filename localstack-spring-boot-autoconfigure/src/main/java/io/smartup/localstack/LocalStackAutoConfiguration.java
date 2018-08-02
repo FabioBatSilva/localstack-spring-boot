@@ -7,6 +7,7 @@ import com.amazonaws.services.kinesis.AmazonKinesis;
 import com.amazonaws.services.route53.AmazonRoute53;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
+import com.amazonaws.services.simplesystemsmanagement.AWSSimpleSystemsManagementClient;
 import io.smartup.localstack.configurator.AmazonDynamoDbConfigurator;
 import io.smartup.localstack.configurator.AmazonDynamoDbStreamsConfigurator;
 import io.smartup.localstack.configurator.AmazonKinesisConfigurator;
@@ -111,6 +112,16 @@ public class LocalStackAutoConfiguration {
         @Bean
         public AmazonKinesisConfigurator amazonKinesisConfigurator() {
             return new AmazonKinesisConfigurator();
+        }
+    }
+
+    @Configuration
+    @ConditionalOnProperty(prefix = "localstack", name = "ssm.enabled", havingValue = "true")
+    @ConditionalOnBean(AWSSimpleSystemsManagementClient.class)
+    public static class AmazonSSMConfigurator {
+        @Bean
+        public AmazonSSMConfigurator amazonKinesisConfigurator() {
+            return new AmazonSSMConfigurator();
         }
     }
 
